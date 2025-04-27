@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   db:
-    image: postgres:14.1
+    image: postgres:latest
     container_name: postgres
     ports:
       - 5432:5432
@@ -34,7 +34,7 @@ services:
       retries: 3
 
   redis:
-    image: redis:7
+    image: redis:latest
     container_name: redis
     ports:
       - 6379:6379
