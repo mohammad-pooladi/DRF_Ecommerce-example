@@ -18,6 +18,9 @@ LOCAL_APPS = [
     'main.common.apps.CommonConfig',
     'main.users.apps.UsersConfig',
     'main.authentication.apps.AuthenticationConfig',
+    'main.orders.apps.OrdersConfig',
+    'main.payments.apps.PaymentsConfig',
+    'main.products.apps.ProductsConfig',
 ]
 
 THIRD_PARTY_APPS = [
