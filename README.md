@@ -1,6 +1,7 @@
 ## project setup
 
-1- ```shell
+1- 
+```shell
 git clone https://github.com/mohammad-pooladi/DRF_Ecommerce-example.git
 ```
 ```
