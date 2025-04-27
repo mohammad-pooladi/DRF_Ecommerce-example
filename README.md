@@ -1,10 +1,11 @@
 ## project setup
 
-1- ```shell
+1- clone project
+```shell
 git clone https://github.com/mohammad-pooladi/DRF_Ecommerce-example.git
 ```
 ```
-cd main
+cd DRF_Ecommerce-example
 ```
 
 2- SetUp venv
