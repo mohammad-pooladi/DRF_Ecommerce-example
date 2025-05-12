@@ -4,9 +4,10 @@ from main.orders.models import Order
 from main.common.models import BaseModel
 
 
-
-class Address(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="addresses")
+class Address(BaseModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="addresses"
+    )
     country = models.CharField(max_length=100)
     province = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -22,19 +23,28 @@ class Address(models.Model):
 
 class Payment(BaseModel):
     STATUS_CHOICES = (
-        ('pending', 'Panding'),
-        ('completed', 'Completed'),
-        ('failed', 'Failed'),
-        ('refunded', 'Refunded'),
+        ("pending", "Panding"),
+        ("completed", "Completed"),
+        ("failed", "Failed"),
+        ("refunded", "Refunded"),
     )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='payments')
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='payment')
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="payments"
+    )
+    order = models.OneToOneField(
+        Order, on_delete=models.CASCADE, related_name="payment"
+    )
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    transaction_id = models.CharField(max_length=100, blank=True, null=True, unique=True)
-    pyment_method = models.CharField(max_length=50, choices=[('crypto', 'Crypto')])
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='panding')
-    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
-    
+    transaction_id = models.CharField(
+        max_length=100, blank=True, null=True, unique=True
+    )
+    PAYMENT_METHODS = [("crypto", "Crypto")]
+    payment_method = models.CharField(max_length=50, choices=PAYMENT_METHODS)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    address = models.ForeignKey(
+        Address, on_delete=models.SET_NULL, null=True, blank=True
+    )
+
     def __str__(self):
-        return f'Payment {self.id} - {self.status}'
+        return f"Payment {self.pk} - {self.status}"
